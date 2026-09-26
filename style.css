@@ -1,16 +1,15 @@
+/* 金额显示样式 */
 .cost-display,
 .prompt-cost-display {
-    color: #e8c547;
+    display: block; /* 让金额强制换行 */
+    margin-top: 2px;
     font-size: 0.85em;
-    margin-left: 4px;
+    color: #ffd966; /* 亮黄色，提高对比度 */
     white-space: nowrap;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5); /* 增加一点阴影防止和背景融在一起 */
 }
 
-.cost-display:hover,
-.prompt-cost-display:hover {
-    color: #ffd966;
-}
-
+/* 设置面板排版 */
 .token-cost-row {
     display: flex;
     flex-direction: column;
@@ -21,7 +20,7 @@
 .token-cost-row label {
     margin-bottom: 4px;
     font-weight: bold;
-    color: var(--SmartThemeBodyColor);
+    color: var(--SmartThemeBodyColor, #ffffff) !important; /* 强制使用主题文字颜色，防止看不清 */
 }
 
 .token-cost-row input,
