@@ -3,14 +3,12 @@ import { saveSettingsDebounced } from '../../../../script.js';
 
 const MODULE_NAME = 'token-cost';
 
-// 默认设置
 const defaultSettings = {
     inputPrice: 0,
     outputPrice: 0,
     currency: '¥',
 };
 
-// 初始化设置
 if (!extension_settings[MODULE_NAME]) {
     extension_settings[MODULE_NAME] = { ...defaultSettings };
 }
@@ -23,14 +21,11 @@ function formatCost(tokens, pricePerMillion) {
     return `${settings.currency}${cost.toFixed(4)}`;
 }
 
-// ---- 消息气泡处理 ----
+// ---- 消息气泡处理 (根据你提供的 DOM 修改) ----
 function processMessageElement(el) {
-    // 找到 .tokenCounter 元素，这是 ST 显示 token 数的位置
-    const tokenEl = el.querySelector('.tokenCounter');
+    const tokenEl = el.querySelector('.tokenCounterDisplay');
     if (!tokenEl) return;
-
-    // 避免重复添加
-    if (tokenEl.querySelector('.cost-display')) return;
+    if (tokenEl.querySelector('.cost-display')) return; // 防止重复添加
 
     const tokenText = tokenEl.textContent.trim();
     const match = tokenText.match(/(\d+)\s*t/);
@@ -38,7 +33,7 @@ function processMessageElement(el) {
 
     const tokenCount = parseInt(match[1], 10);
     const cost = formatCost(tokenCount, settings.outputPrice);
-    if (!cost) return;
+    if (!cost) return; // 如果没填单价，就不显示
 
     const span = document.createElement('span');
     span.className = 'cost-display';
@@ -46,17 +41,19 @@ function processMessageElement(el) {
     tokenEl.appendChild(span);
 }
 
-// ---- 提示词面板处理 ----
+// ---- 提示词面板处理 (根据你提供的 DOM 修改) ----
 function processPromptPanel() {
-    // 查找显示 "总 Token 数量" 的元素
-    const promptEl = document.querySelector('#prompt_token_count, .prompt-token-count');
-    if (!promptEl) return;
+    // 定位包含 "Total Tokens:" 的 span 的父级 div
+    const spanEl = document.querySelector('span[data-i18n="Total Tokens:"]');
+    if (!spanEl) return;
+    
+    const parentEl = spanEl.parentElement;
+    if (!parentEl) return;
+    if (parentEl.querySelector('.prompt-cost-display')) return; // 防止重复添加
 
-    // 避免重复添加
-    if (promptEl.querySelector('.prompt-cost-display')) return;
-
-    const text = promptEl.textContent.trim();
-    const match = text.match(/(\d+)/);
+    // 获取父级的全部文本，比如 "总 Token 数量： 10842"
+    const text = parentEl.textContent.trim();
+    const match = text.match(/(\d+)/); // 提取里面的数字
     if (!match) return;
 
     const totalTokens = parseInt(match[1], 10);
@@ -66,7 +63,7 @@ function processPromptPanel() {
     const span = document.createElement('span');
     span.className = 'prompt-cost-display';
     span.textContent = ` · ${cost}`;
-    promptEl.appendChild(span);
+    parentEl.appendChild(span);
 }
 
 // ---- 批量处理 ----
@@ -83,7 +80,6 @@ function startObserver() {
         });
         observer.observe(chat, { childList: true, subtree: true });
     }
-
     // 提示词面板变化较少，定时检查即可
     setInterval(processPromptPanel, 2000);
 }
@@ -140,7 +136,6 @@ function createSettingsUI() {
 
 // ---- 刷新 ----
 function refreshAll() {
-    // 移除旧显示
     document.querySelectorAll('.cost-display, .prompt-cost-display').forEach(el => el.remove());
     processAllMessages();
     processPromptPanel();
