@@ -1,0 +1,12 @@
+.cost-display,
+.prompt-cost-display {
+    color: #e8c547;
+    font-size: 0.85em;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+.cost-display:hover,
+.prompt-cost-display:hover {
+    color: #ffd966;
+}

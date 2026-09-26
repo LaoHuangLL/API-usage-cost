@@ -1,0 +1,10 @@
+{
+    "display_name": "Token Cost Display",
+    "name": "token-cost",
+    "version": "1.0.0",
+    "author": "your-name",
+    "description": "在消息气泡和提示词面板中显示 Token 对应的金额估算。",
+    "js": "index.js",
+    "css": "style.css",
+    "loading_order": 20
+}
