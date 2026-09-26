@@ -23,6 +23,8 @@ function formatCost(tokens, pricePerMillion) {
 
 // ---- 消息气泡处理 (根据你提供的 DOM 修改) ----
 function processMessageElement(el) {
+    if (el.dataset.isUser === 'true') return;
+    
     const tokenEl = el.querySelector('.tokenCounterDisplay');
     if (!tokenEl) return;
     if (tokenEl.querySelector('.cost-display')) return; // 防止重复添加
