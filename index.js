@@ -94,19 +94,25 @@ function createSettingsUI() {
     <div id="token-cost-settings" class="token-cost-settings">
         <div class="inline-drawer">
             <div class="inline-drawer-toggle inline-drawer-header">
-                <b>Token Cost Display</b>
+                <b>API usage cost</b>
                 <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
             </div>
             <div class="inline-drawer-content">
-                <label>货币符号</label>
-                <select id="cost-currency">
-                    <option value="¥">¥ (人民币)</option>
-                    <option value="$">$ (美元)</option>
-                </select>
-                <label>输入单价（每 100 万 token）</label>
-                <input id="cost-input-price" type="number" min="0" step="0.01" value="${settings.inputPrice}">
-                <label>输出单价（每 100 万 token）</label>
-                <input id="cost-output-price" type="number" min="0" step="0.01" value="${settings.outputPrice}">
+                <div class="token-cost-row">
+                    <label for="cost-currency">货币符号</label>
+                    <select id="cost-currency">
+                        <option value="¥">¥ (人民币)</option>
+                        <option value="$">$ (美元)</option>
+                    </select>
+                </div>
+                <div class="token-cost-row">
+                    <label for="cost-input-price">输入单价（每 100 万 token）</label>
+                    <input id="cost-input-price" type="number" min="0" step="0.01" value="${settings.inputPrice}">
+                </div>
+                <div class="token-cost-row">
+                    <label for="cost-output-price">输出单价（每 100 万 token）</label>
+                    <input id="cost-output-price" type="number" min="0" step="0.01" value="${settings.outputPrice}">
+                </div>
             </div>
         </div>
     </div>`;
