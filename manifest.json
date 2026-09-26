@@ -1,8 +1,8 @@
 {
-    "display_name": "Token Cost Display",
-    "name": "token-cost",
+    "display_name": "API-usage-cost",
+    "name": "usage-cost",
     "version": "1.0.0",
-    "author": "your-name",
+    "author": "LaoHuangLL",
     "description": "在消息气泡和提示词面板中显示 Token 对应的金额估算。",
     "js": "index.js",
     "css": "style.css",
