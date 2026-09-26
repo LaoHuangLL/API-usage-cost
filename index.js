@@ -96,18 +96,18 @@ function createSettingsUI() {
             <div class="inline-drawer-content">
                 <div class="token-cost-row">
                     <label for="cost-currency">货币符号</label>
-                    <select id="cost-currency">
+                    <select id="cost-currency" class="text_pole">
                         <option value="¥">¥ (人民币)</option>
                         <option value="$">$ (美元)</option>
                     </select>
                 </div>
                 <div class="token-cost-row">
                     <label for="cost-input-price">输入单价（每 100 万 token）</label>
-                    <input id="cost-input-price" type="number" min="0" step="0.01" value="${settings.inputPrice}">
+                    <input id="cost-input-price" class="text_pole" type="number" min="0" step="0.01" value="${settings.inputPrice}">
                 </div>
                 <div class="token-cost-row">
                     <label for="cost-output-price">输出单价（每 100 万 token）</label>
-                    <input id="cost-output-price" type="number" min="0" step="0.01" value="${settings.outputPrice}">
+                    <input id="cost-output-price" class="text_pole" type="number" min="0" step="0.01" value="${settings.outputPrice}">
                 </div>
             </div>
         </div>
